@@ -1,53 +1,124 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<title>Pattern Preview Generator</title>
+<title>Barbara's Pattern Preview Generator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
 <style>
 body{
 	background-color:#DAB983;
-	font-family: 'Poppins', sans-serif;
-	font-family: 'Roboto', sans-serif;
-	font-family: 'Roboto Mono', monospace;
+	font-family:'Poppins',sans-serif;
+	font-family:'Roboto',sans-serif;
+	font-family:'Roboto Mono',monospace;
 }
 
-div{
+#div1{
 	width:800px;
 	height:800px;
-}
-#div1{
 	background-image:url("pat0.png");
+	border-radius:20px;
 }
 #div2{
+	width:800px;
+	height:800px;
 	position:fixed;
 	top:8px;
 	left:8px;
 	background-image:url("kimo.png");
+	border-radius:20px;
 }
 #div3{
 	position:fixed;
 	top:8px;
-	right:8px;
+	right:10%;
 }
 table,tbody,tr,td{
 	text-align:center;
 }
+
+.input-div {
+	color:#8C5F37;
+	width:100%;
+	height:200px;
+	border-radius:20px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	text-align:center;
+	border:dashed 2px #8C5F37;
+	background-color:rgba(255,255,255,0.2);
+	position:relative;
+}
+
+.file {
+	width:100%;
+	height:100%;
+	position:absolute;
+	opacity:0;
+	cursor:pointer;
+}
+
+output {
+  width: 100%;
+  min-height: 150px;
+  display: flex;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  gap:15px;
+  position:relative;
+  border-radius:20px;
+}
+
+output .image {
+  height:150px;
+  border-radius: 5px;
+  box-shadow:0 0 5px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+}
+
+output .image img {
+  height:100%;
+  width:100%;
+}
+
+output .image span {
+  position:absolute;
+  top:-4px;
+  right:4px;
+  cursor:pointer;
+  font-size:22px;
+  color:white;
+}
+
+output .image span:hover {
+  opacity:0.8;
+}
+
+output .span--hidden {
+  visibility:hidden;
+}
+
 </style>
 </head>
 <body>
 <div id="div1"></div>
 <div id="div2"></div>
 <div id="div3">
-	<span style="font-size:24px;">Pattern Preview Generator</span><br>
-	<span>パターンプレビュージェネレーター</span><br><br>
+	<span style="font-size:24px;">Barbara's Pattern Preview Generator</span><br>
+	<span style="color:#8C5F37;">パターンプレビュージェネレーター</span><br><br>
 	<table>
 	<tbody>
 	<tr><td><img src="pat1.png"/></td><td><img src="pat2.png"/></td><td><img src="pat3.png"/></td></tr>
 	<tr><td><button id="but1" onclick="chgpat1()">Pattern 1</button></td><td><button id="but2" onclick="chgpat2()">Pattern 2</button></td><td><button id="but3" onclick="chgpat3()">Pattern 3</button></td></tr>
 	</tbody>
-	</table>
+	</table><br>
+	<div class="input-div">
+		<p>Drag &amp; drop photos here or <strong>Browse</strong></p>
+		<input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
+	</div>
+	<output></output>
 </div>
 <script>
 	function chgpat1(){
@@ -60,6 +131,49 @@ table,tbody,tr,td{
 
 	function chgpat3(){
 		document.getElementById("div1").style.backgroundImage="url('pat3.png')";
+	}
+</script>
+<script>
+	const inputDiv = document.querySelector(".input-div");
+	const input = document.querySelector("input");
+	const output = document.querySelector("output");
+	let imagesArray = [];
+
+	input.addEventListener("change", () => {
+	  const files = input.files
+	  for (let i = 0; i < files.length; i++) {
+		imagesArray.push(files[i])
+	  }
+	  displayImages()
+	})
+
+	inputDiv.addEventListener("drop", () => {
+	  e.preventDefault()
+	  const files = e.dataTransfer.files
+	  for (let i = 0; i < files.length; i++) {
+		if (!files[i].type.match("image")) continue;
+
+		if (imagesArray.every(image => image.name !== files[i].name))
+		  imagesArray.push(files[i])
+	  }
+	  displayImages()
+	})
+
+	function displayImages() {
+	  let images=""
+	  imagesArray.forEach((image,index) => {
+		images += `<div class="image">
+					<img src="${URL.createObjectURL(image)}" alt="image">
+					<span onclick="deleteImage(${index})">&times;</span>
+				  </div>`
+	  })
+	  output.innerHTML = images
+	  document.getElementById("div1").style.backgroundImage="url('pat1.png')";
+	}
+
+	function deleteImage(index) {
+	  imagesArray.splice(index, 1)
+	  displayImages()
 	}
 </script>
 </body>
