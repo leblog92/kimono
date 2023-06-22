@@ -141,15 +141,15 @@
 		</div>
 		<script>
 			function chgpat1(){
-				document.getElementById("div1").style.backgroundImage = "url('pat1.png')";
+				document.getElementById("div1").style.backgroundImage="url('pat1.png')";
 			}
 
 			function chgpat2(){
-				document.getElementById("div1").style.backgroundImage = "url('pat2.png')";
+				document.getElementById("div1").style.backgroundImage="url('pat2.png')";
 			}
 
 			function chgpat3(){
-				document.getElementById("div1").style.backgroundImage = "url('pat3.png')";
+				document.getElementById("div1").style.backgroundImage="url('pat3.png')";
 			}
 		</script>
 		<script>
@@ -161,8 +161,8 @@
 				e.preventDefault();
 				e.stopPropagation();
 				const file=event.dataTransfer.files[0];
-				let newURL = URL.createObjectURL( file);
-				if(oldURL) {
+				let newURL=URL.createObjectURL( file);
+				if(oldURL){
 					URL.revokeObjectURL(oldURL);
 				}
 				oldURL=newURL;
@@ -173,6 +173,7 @@
 		var smaller=document.getElementById("smaller");
 		var bigger=document.getElementById("bigger");
 		smaller.addEventListener("click",function(){size--;document.getElementById("div1").style.backgroundSize=size+"%";});
+		biggerer.addEventListener("click",function(){size++;document.getElementById("div1").style.backgroundSize=size+"%";});
 		</script>
 	</body>
 </html>
