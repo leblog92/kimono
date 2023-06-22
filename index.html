@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Pattern Preview Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
+<style>
+body{
+	background-color:#DAB983;
+	font-family: 'Poppins', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto Mono', monospace;
+}
+
+div{
+	width:800px;
+	height:800px;
+}
+#div1{
+	background-image:url("pat0.png");
+}
+#div2{
+	position:fixed;
+	top:8px;
+	left:8px;
+	background-image:url("kimo.png");
+}
+#div3{
+	position:fixed;
+	top:8px;
+	right:8px;
+}
+</style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3">
+	<h1>Pattern Preview Generator</h1>
+	<button id="but1" onclick="chgpat1()">Pattern 1</button> <button id="but2" onclick="chgpat2()">Pattern 2</button> <button id="but3" onclick="chgpat3()">Pattern 3</button>
+</div>
+<script>
+	function chgpat1(){
+		document.getElementById("div1").style.backgroundImage="url('pat1.png')";
+	}
+
+	function chgpat2(){
+		document.getElementById("div1").style.backgroundImage="url('pat2.png')";
+	}
+
+	function chgpat3(){
+		document.getElementById("div1").style.backgroundImage="url('pat3.png')";
+	}
+</script>
+</body>
+</html>
