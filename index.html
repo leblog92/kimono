@@ -136,7 +136,8 @@
 			</table><br>
 			<div class="input-div">
 				<p>Drag &amp; drop photos here</p><input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
-			</div><br><output></output>
+			</div><br><output></output><br>
+			<div id="smaller">-</div><div id="bigger">+</div>
 		</div>
 		<script>
 			function chgpat1(){
@@ -167,6 +168,11 @@
 				oldURL=newURL;
 				document.getElementById("div1").style.backgroundImage=`url("${newURL}")`;
 			});
+			
+		var size=100;
+		var smaller=document.getElementById("smaller");
+		var bigger=document.getElementById("bigger");
+		smaller.addEventListener("click",function(){size--;document.getElementById("div1").style.backgroundSize=size+"%";});
 		</script>
 	</body>
 </html>
