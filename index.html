@@ -19,12 +19,14 @@
 				color:#8C5F37;
 				border-radius:20px;
 			}
+
 			#div1 {
 				width:800px;
 				height:800px;
 				background-image:url("pat0.png");
 				border-radius:20px;
 				box-shadow:0 0 7px rgba(0, 0, 0, 0.5);
+				
 			}
 
 			#div2 {
@@ -168,12 +170,12 @@
 				oldURL=newURL;
 				document.getElementById("div1").style.backgroundImage=`url("${newURL}")`;
 			});
-			
+
 		var size=100;
 		var smaller=document.getElementById("smaller");
 		var bigger=document.getElementById("bigger");
-		smaller.addEventListener("click",function(){size--;document.getElementById("div1").style.backgroundSize=size+"%";});
-		biggerer.addEventListener("click",function(){size++;document.getElementById("div1").style.backgroundSize=size+"%";});
+		smaller.addEventListener("click",function(){size--;document.getElementById("div1").style.backgroundSize=size+"px";});
+		bigger.addEventListener("click",function(){size++;document.getElementById("div1").style.backgroundSize=size+"px";});
 		</script>
 	</body>
 </html>
