@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="fr">
 	<head>
-		<title>Barbara's Pattern Preview Generator</title>
+		<title>Barbara's Cloth Pattern Tester</title>
+		<link rel="icon" type="image/png" href="pat1.png"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -34,14 +35,14 @@
 				position:fixed;
 				top:8px;
 				left:8px;
-				background-image:url("kimo.png");
+				background-image:url("front.png");
 				border-radius:20px;
 			}
 
 			#div3 {
 				position:fixed;
 				top:8px;
-				right:10%;
+				right:5%;
 			}
 
 			table,
@@ -77,52 +78,73 @@
 			.samp {
 				height:50px;
 				width:auto;
+				border-radius:10px;
+				border:1px solid #8C5F37;
 			}
+
 			.sp1 {
 				color:#8C5F37;
 				font-size:20px;
-				border:2px solid #8C5F37;
+				border:1px solid #8C5F37;
 				padding:10px 15px 10px 15px;
 				border-radius:10px;
 				user-select:none;
 				cursor:pointer;
+				transition:0.5s;
+			}
+
+			.sp1:hover {
+				color:#DAB983;
+				background:#8C5F37;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="div1"></div>
 		<div id="div2"></div>
-		<div id="div3"><br><span style="font-size:24px;">Barbara's Pattern Preview Generator</span><br>
-		<span style="color:#8C5F37;">パターンプレビュージェネレーター</span><br>
+		<div id="div3"><br><span style="font-size:24px;">Barbara's Cloth Pattern Tester</span><br>
+		<span style="color:#8C5F37;">バーバラの布パターンテスター</span><br>
 		<br>
 			<table>
 				<tbody>
 					<tr>
-						<td><button id="but1" onclick="chgpat1()"><img src="pat1.png" class="samp" /><br>サンプル 1</button></td>
-						<td><button id="but2" onclick="chgpat2()"><img src="pat2.png" class="samp" /><br>サンプル 2</button></td>
-						<td><button id="but3" onclick="chgpat3()"><img src="pat3.png" class="samp" /><br>サンプル 3</button></td>
+						<td><button id="but1"><img src="pat1.png" class="samp" /><br><span style="color:black">Pattern 1</span><br>サンプル 1</button></td>
+						<td><button id="but2"><img src="pat2.png" class="samp" /><br><span style="color:black">Pattern 2</span><br>サンプル 2</button></td>
+						<td><button id="but3"><img src="pat3.png" class="samp" /><br><span style="color:black">Pattern 3</span><br>サンプル 3</button></td>
 					</tr>
 				</tbody>
 			</table><br>
 			<div class="input-div">
-				<p>Drag &amp; drop photos here</p><input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
+				<p><img src="upload.png" width="50px" height="50px"/><br>Drag &amp; drop photos here<br><span>ここに写真をドラッグアンドドロップします</span></p><input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
 			</div>
 			<br>
-			<span class="sp1" id="smaller">-</span>&nbsp;<span class="sp1" id="bigger">+</span>
+			<table>
+			<tbody>
+			<tr>
+			<td style="text-align:left;padding-right:10px;">Change pattern size<br><span style="color:#8C5F37;">パターンサイズの変更</span></td><td style="vertical-align:middle;"><span class="sp1" id="smaller">-</span></td><td style="vertical-align:middle;"><span class="sp1" id="bigger">+</span></td>
+			</tr>
+			</tbody>
+			</table><br>
+			<span class="sp1" id="froback" style="font-size:1em;">Back view</span>
 		</div>
 		<script>
 			const div1=document.getElementById("div1");
+			const div2=document.getElementById("div2");
 			const smaller=document.getElementById("smaller");
 			const bigger=document.getElementById("bigger");
+			const froback=document.getElementById("froback");
 			const inputDiv=document.querySelector(".input-div");
 			const input=document.querySelector("input");
-			const output=document.querySelector("output");
+			
+			let front=true;
 			let oldURL=null;
-			let size=100;
+			let size=60;
 
-			function chgpat1(){div1.style.backgroundImage="url('pat1.png')";}
-			function chgpat2(){div1.style.backgroundImage="url('pat2.png')";}
-			function chgpat3(){div1.style.backgroundImage="url('pat3.png')";}
+			function chgpat(a){div1.style.backgroundImage="url('pat"+a+".png')";}
+
+			document.getElementById("but1").addEventListener("click",function(){chgpat(1)});
+			document.getElementById("but2").addEventListener("click",function(){chgpat(2)});
+			document.getElementById("but3").addEventListener("click",function(){chgpat(3)});
 
 			inputDiv.addEventListener("drop",(e)=>{
 				e.preventDefault();
@@ -137,15 +159,20 @@
 			smaller.addEventListener("click",function(){size--;div1.style.backgroundSize=size+"px";});
 			bigger.addEventListener("click",function(){size++;div1.style.backgroundSize=size+"px";});
 
-			document.addEventListener('keydown',(event)=>{
+			document.addEventListener("keydown",(event)=>{
 				var name=event.key;
 				var code=event.code;
 				if(event.key=="-"){size--;div1.style.backgroundSize=size+"px";}
 				if(event.key=="+"){size++;div1.style.backgroundSize=size+"px";}
-				if(event.key=="1"){chgpat1();}
-				if(event.key=="2"){chgpat2();}
-				if(event.key=="3"){chgpat3();}
+				if(event.key=="0"){chgpat(0);}
+				if(event.key=="1"){chgpat(1);}
+				if(event.key=="2"){chgpat(2);}
+				if(event.key=="3"){chgpat(3);}
+				if(event.key=="b"){div2.style.backgroundImage="url('back.png')";froback.innerHTML="Front view";front=false;}
+				if(event.key=="f"){div2.style.backgroundImage="url('front.png')";froback.innerHTML="Back view";front=true;}
 			}, false);
+			
+			froback.addEventListener("click",function(){if(front==true){div2.style.backgroundImage="url('back.png')";froback.innerHTML="Front view";front=false;}else{div2.style.backgroundImage="url('front.png')";froback.innerHTML="Back view";front=true;}});
 		</script>
 	</body>
 </html>
