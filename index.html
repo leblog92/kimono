@@ -12,12 +12,11 @@
 				font-family:'Roboto',sans-serif;
 				font-family:'Roboto Mono',monospace;
 			}
-			button{
+			button {
 				background:none;
-				border:1px solid #8C5F37;
+				border:none;
 				cursor:pointer;
 				color:#8C5F37;
-				border-radius:20px;
 			}
 
 			#div1 {
@@ -50,6 +49,7 @@
 			tr,
 			td {
 				text-align:center;
+				vertical-align:bottom;
 			}
 
 			.input-div {
@@ -114,6 +114,11 @@
 			output .span--hidden{
 				visibility: hidden;
 			}
+
+			.samp {
+				height:50px;
+				width:auto;
+			}
 		</style>
 	</head>
 	<body>
@@ -125,14 +130,9 @@
 			<table>
 				<tbody>
 					<tr>
-						<td><img src="pat1.png"/></td>
-						<td><img src="pat2.png"/></td>
-						<td><img src="pat3.png"/></td>
-					</tr>
-					<tr>
-						<td><button id="but1" onclick="chgpat1()">Pattern 1</button></td>
-						<td><button id="but2" onclick="chgpat2()">Pattern 2</button></td>
-						<td><button id="but3" onclick="chgpat3()">Pattern 3</button></td>
+						<td><button id="but1" onclick="chgpat1()"><img src="pat1.png" class="samp" /><br>Sample 1</button></td>
+						<td><button id="but2" onclick="chgpat2()"><img src="pat2.png" class="samp" /><br>Sample 2</button></td>
+						<td><button id="but3" onclick="chgpat3()"><img src="pat3.png" class="samp" /><br>Sample 3</button></td>
 					</tr>
 				</tbody>
 			</table><br>
@@ -142,40 +142,41 @@
 			<div id="smaller">-</div><div id="bigger">+</div>
 		</div>
 		<script>
-			function chgpat1(){
-				document.getElementById("div1").style.backgroundImage="url('pat1.png')";
-			}
-
-			function chgpat2(){
-				document.getElementById("div1").style.backgroundImage="url('pat2.png')";
-			}
-
-			function chgpat3(){
-				document.getElementById("div1").style.backgroundImage="url('pat3.png')";
-			}
-		</script>
-		<script>
+			const div1=document.getElementById("div1");
+			const smaller=document.getElementById("smaller");
+			const bigger=document.getElementById("bigger");
 			const inputDiv=document.querySelector(".input-div");
 			const input=document.querySelector("input");
 			const output=document.querySelector("output");
 			let oldURL=null;
+			let size=100;
+
+			function chgpat1(){div1.style.backgroundImage="url('pat1.png')";}
+			function chgpat2(){div1.style.backgroundImage="url('pat2.png')";}
+			function chgpat3(){div1.style.backgroundImage="url('pat3.png')";}
+
 			inputDiv.addEventListener("drop",(e)=>{
 				e.preventDefault();
 				e.stopPropagation();
 				const file=event.dataTransfer.files[0];
-				let newURL=URL.createObjectURL( file);
-				if(oldURL){
-					URL.revokeObjectURL(oldURL);
-				}
+				let newURL=URL.createObjectURL(file);
+				if(oldURL){URL.revokeObjectURL(oldURL);}
 				oldURL=newURL;
-				document.getElementById("div1").style.backgroundImage=`url("${newURL}")`;
+				div1.style.backgroundImage=`url("${newURL}")`;
 			});
 
-		var size=100;
-		var smaller=document.getElementById("smaller");
-		var bigger=document.getElementById("bigger");
-		smaller.addEventListener("click",function(){size--;document.getElementById("div1").style.backgroundSize=size+"px";});
-		bigger.addEventListener("click",function(){size++;document.getElementById("div1").style.backgroundSize=size+"px";});
+			smaller.addEventListener("click",function(){size--;div1.style.backgroundSize=size+"px";});
+			bigger.addEventListener("click",function(){size++;div1.style.backgroundSize=size+"px";});
+
+			document.addEventListener('keydown',(event)=>{
+				var name=event.key;
+				var code=event.code;
+				if(event.key=="-"){size--;div1.style.backgroundSize=size+"px";}
+				if(event.key=="+"){size++;div1.style.backgroundSize=size+"px";}
+				if(event.key=="1"){chgpat1();}
+				if(event.key=="2"){chgpat2();}
+				if(event.key=="3"){chgpat3();}
+			}, false);
 		</script>
 	</body>
 </html>
