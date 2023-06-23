@@ -39,7 +39,7 @@
 				left:8px;
 				background-image:url("front.png");
 				border-radius:20px;
-				transition:3s;
+				transition:2s;
 			}
 
 			#div3 {
@@ -144,7 +144,7 @@
 				<p><img src="upload.png" width="50px" height="50px"/><br>Drag &amp; drop pattern here<br><span>ここに写真をドラッグアンドドロップします</span></p><input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
 			</div>
 			<br>
-			Pattern URL <input type="text" id="input2"></input><br>
+			Pattern URL <input type="text" id="input2"></input><button id="ok1">OK</button><br>
 			<br>
 			<table>
 			<tbody>
@@ -160,6 +160,15 @@
 			Ressources<br>
 			• <a href="https://japan-avenue.com/blogs/japan/japanese-patterns" target="_blank">Japan avenue</a><br>
 			• <a href="https://tankenjapan.com/25-common-japanese-patterns-and-their-meaning/" target="_blank">Tanken Japan</a><br>
+			<br>
+			Keyboard Shortcuts<br>
+			• <span style="color:#8C5F37">0 > Reset</span><br>
+			• <span style="color:#8C5F37">1 > Pattern 1</span><br>
+			• <span style="color:#8C5F37">2 > Pattern 2</span><br>
+			• <span style="color:#8C5F37">3 > Pattern 3</span><br>
+			• <span style="color:#8C5F37">f > Front view</span><br>
+			• <span style="color:#8C5F37">b > Back view</span><br>
+			• <span style="color:#8C5F37">Mousewheel > change size</span><br>
 		</div>
 		<script>
 			const div1=document.getElementById("div1");
@@ -191,15 +200,15 @@
 				div1.style.backgroundImage=`url("${newURL}")`;
 			});
 
-			smaller.addEventListener("click",function(){size--;div1.style.backgroundSize=size+"px";});
+			smaller.addEventListener("click",function(){size--;if(size<1){size=1};div1.style.backgroundSize=size+"px";});
 			bigger.addEventListener("click",function(){size++;div1.style.backgroundSize=size+"px";});
 
-			document.addEventListener("keydown",(event)=>{
+			document.addEventListener("keypress",(event)=>{
 				var name=event.key;
 				var code=event.code;
 				if(name=="-"){size--;div1.style.backgroundSize=size+"px";}
 				if(name=="+"){size++;div1.style.backgroundSize=size+"px";}
-				if(event.key=="0"){chgpat(0);}
+				if(event.key=="0"){size=60;chgpat(0);div1.style.backgroundSize=size+"px";}
 				if(name=="1"){chgpat(1);}
 				if(name=="2"){chgpat(2);}
 				if(name=="3"){chgpat(3);}
@@ -213,18 +222,18 @@
 				div1.style.backgroundImage="url('"+URL.createObjectURL(this.files[0])+"')";
 			}
 
-			input2.addEventListener("change",()=>{
-				div1.style.backgroundImage="url('"+input2.value+"')";
+			document.getElementById("ok1").addEventListener("click",()=>{
+				if(input2.value!=""){div1.style.backgroundImage="url('"+input2.value+"')";}
 			})
 			
 			function myWheel(event) {
 			var y = event.deltaY;
 			if (y > 0) {
-				size--;
+				size--;if(size<1){size=1};
 			} else {
 				size++;
 			}
-			div1.style.backgroundSize=size+"px";
+				div1.style.backgroundSize=size+"px";
 			}
 		</script>
 	</body>
