@@ -74,50 +74,18 @@
 				cursor:pointer;
 			}
 
-			output {
-				width:100%;
-				min-height:150px;
-				display:flex;
-				justify-content:flex-start;
-				flex-wrap:wrap;
-				gap:15px;
-				position:relative;
-				border-radius:20px;
-			}
-
-			output .image {
-				height: 150px;
-				border-radius: 5px;
-				box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-				overflow: hidden;
-				position: relative;
-			}
-
-			output .image img {
-				height: 100%;
-				width: 100%;
-			}
-
-			output .image span {
-				position: absolute;
-				top: -4px;
-				right: 4px;
-				cursor: pointer;
-				font-size: 22px;
-				color: white;
-			}
-
-			output .image span:hover {
-				opacity: 0.8;
-			}
-
-			output .span--hidden {
-				visibility: hidden;
-			}
-
 			.samp {
 				height:50px;
 				width:auto;
+			}
+			.sp1 {
+				color:#8C5F37;
+				font-size:20px;
+				border:2px solid #8C5F37;
+				padding:10px 15px 10px 15px;
+				border-radius:10px;
+				user-select:none;
+				cursor:pointer;
 			}
 		</style>
 	</head>
@@ -140,7 +108,7 @@
 				<p>Drag &amp; drop photos here</p><input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
 			</div>
 			<br>
-			<span id="smaller">-</span><span id="bigger">+</span>
+			<span class="sp1" id="smaller">-</span>&nbsp;<span class="sp1" id="bigger">+</span>
 		</div>
 		<script>
 			const div1=document.getElementById("div1");
