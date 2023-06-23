@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
 	<head>
+		<meta charset="utf-8">
 		<title>Barbara's Cloth Pattern Tester</title>
 		<link rel="icon" type="image/png" href="pat1.png"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,6 +46,11 @@
 				right:5%;
 			}
 
+			#input2{
+				background:none;
+				border:solid 1px #8C5F37;
+				border-radius:5px;
+			}
 			table,
 			tbody,
 			tr,
@@ -121,8 +127,10 @@
 				</tbody>
 			</table><br>
 			<div class="input-div">
-				<p><img src="upload.png" width="50px" height="50px"/><br>Drag &amp; drop photos here<br><span>ここに写真をドラッグアンドドロップします</span></p><input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
+				<p><img src="upload.png" width="50px" height="50px"/><br>Drag &amp; drop pattern here<br><span>ここに写真をドラッグアンドドロップします</span></p><input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
 			</div>
+			<br>
+			Pattern URL <input type="text" id="input2"></input><br>
 			<br>
 			<table>
 			<tbody>
@@ -147,6 +155,7 @@
 			const froback=document.getElementById("froback");
 			const inputDiv=document.querySelector(".input-div");
 			const input=document.querySelector("input");
+			const input2=document.getElementById("input2");
 			
 			let front=true;
 			let oldURL=null;
@@ -154,9 +163,9 @@
 
 			function chgpat(a){div1.style.backgroundImage="url('pat"+a+".png')";}
 
-			document.getElementById("but1").addEventListener("click",function(){chgpat(1)});
-			document.getElementById("but2").addEventListener("click",function(){chgpat(2)});
-			document.getElementById("but3").addEventListener("click",function(){chgpat(3)});
+			document.getElementById("but1").addEventListener("click",function(){chgpat(1);});
+			document.getElementById("but2").addEventListener("click",function(){chgpat(2);});
+			document.getElementById("but3").addEventListener("click",function(){chgpat(3);});
 
 			inputDiv.addEventListener("drop",(e)=>{
 				e.preventDefault();
@@ -174,17 +183,25 @@
 			document.addEventListener("keydown",(event)=>{
 				var name=event.key;
 				var code=event.code;
-				if(event.key=="-"){size--;div1.style.backgroundSize=size+"px";}
-				if(event.key=="+"){size++;div1.style.backgroundSize=size+"px";}
+				if(name=="-"){size--;div1.style.backgroundSize=size+"px";}
+				if(name=="+"){size++;div1.style.backgroundSize=size+"px";}
 				if(event.key=="0"){chgpat(0);}
-				if(event.key=="1"){chgpat(1);}
-				if(event.key=="2"){chgpat(2);}
-				if(event.key=="3"){chgpat(3);}
-				if(event.key=="b"){div2.style.backgroundImage="url('back.png')";froback.innerHTML="Front view";front=false;}
-				if(event.key=="f"){div2.style.backgroundImage="url('front.png')";froback.innerHTML="Back view";front=true;}
+				if(name=="1"){chgpat(1);}
+				if(name=="2"){chgpat(2);}
+				if(name=="3"){chgpat(3);}
+				if(name=="b"){div2.style.backgroundImage="url('back.png')";froback.innerHTML="Front view";front=false;}
+				if(name=="f"){div2.style.backgroundImage="url('front.png')";froback.innerHTML="Back view";front=true;}
 			}, false);
 			
 			froback.addEventListener("click",function(){if(front==true){div2.style.backgroundImage="url('back.png')";froback.innerHTML="Front view";front=false;}else{div2.style.backgroundImage="url('front.png')";froback.innerHTML="Back view";front=true;}});
+			
+			input.onchange=function(e){
+				div1.style.backgroundImage="url('"+URL.createObjectURL(this.files[0])+"')";
+			}
+
+			input2.addEventListener("change",()=>{
+				div1.style.backgroundImage="url('"+input2.value+"')";
+			})
 		</script>
 	</body>
 </html>
