@@ -7,7 +7,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
 		<style>
 			body {
-				background-color: #DAB983;
+				background-color:#DAB983;
 				font-family:'Poppins',sans-serif;
 				font-family:'Roboto',sans-serif;
 				font-family:'Roboto Mono',monospace;
@@ -93,12 +93,12 @@
 				position: relative;
 			}
 
-			output .image img{
+			output .image img {
 				height: 100%;
 				width: 100%;
 			}
 
-			output .image span{
+			output .image span {
 				position: absolute;
 				top: -4px;
 				right: 4px;
@@ -107,11 +107,11 @@
 				color: white;
 			}
 
-			output .image span:hover{
+			output .image span:hover {
 				opacity: 0.8;
 			}
 
-			output .span--hidden{
+			output .span--hidden {
 				visibility: hidden;
 			}
 
@@ -130,16 +130,17 @@
 			<table>
 				<tbody>
 					<tr>
-						<td><button id="but1" onclick="chgpat1()"><img src="pat1.png" class="samp" /><br>Sample 1</button></td>
-						<td><button id="but2" onclick="chgpat2()"><img src="pat2.png" class="samp" /><br>Sample 2</button></td>
-						<td><button id="but3" onclick="chgpat3()"><img src="pat3.png" class="samp" /><br>Sample 3</button></td>
+						<td><button id="but1" onclick="chgpat1()"><img src="pat1.png" class="samp" /><br>サンプル 1</button></td>
+						<td><button id="but2" onclick="chgpat2()"><img src="pat2.png" class="samp" /><br>サンプル 2</button></td>
+						<td><button id="but3" onclick="chgpat3()"><img src="pat3.png" class="samp" /><br>サンプル 3</button></td>
 					</tr>
 				</tbody>
 			</table><br>
 			<div class="input-div">
 				<p>Drag &amp; drop photos here</p><input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
-			</div><br><output></output><br>
-			<div id="smaller">-</div><div id="bigger">+</div>
+			</div>
+			<br>
+			<span id="smaller">-</span><span id="bigger">+</span>
 		</div>
 		<script>
 			const div1=document.getElementById("div1");
