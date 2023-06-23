@@ -27,6 +27,7 @@
 				background-image:url("pat0.png");
 				border-radius:20px;
 				box-shadow:0 0 7px rgba(0, 0, 0, 0.5);
+				transition:0.5s;
 				
 			}
 
@@ -38,6 +39,7 @@
 				left:8px;
 				background-image:url("front.png");
 				border-radius:20px;
+				transition:3s;
 			}
 
 			#div3 {
@@ -46,11 +48,22 @@
 				right:5%;
 			}
 
+			#div4 {
+				width:800px;
+				height:800px;
+				position:fixed;
+				top:8px;
+				left:8px;
+				background:none;
+				border-radius:20px;
+			}
+
 			#input2{
 				background:none;
 				border:solid 1px #8C5F37;
 				border-radius:5px;
 			}
+
 			table,
 			tbody,
 			tr,
@@ -115,6 +128,7 @@
 		<div id="div1"></div>
 		<div id="div2"></div>
 		<div id="div3"><br><span style="font-size:24px;">Barbara's Cloth Pattern Tester</span><br>
+		<div id="div4" onwheel="myWheel(event)"></div>
 		<span style="color:#8C5F37;">バーバラの布パターンテスター</span><br>
 		<br>
 			<table>
@@ -202,6 +216,16 @@
 			input2.addEventListener("change",()=>{
 				div1.style.backgroundImage="url('"+input2.value+"')";
 			})
+			
+			function myWheel(event) {
+			var y = event.deltaY;
+			if (y > 0) {
+				size--;
+			} else {
+				size++;
+			}
+			div1.style.backgroundSize=size+"px";
+			}
 		</script>
 	</body>
 </html>
