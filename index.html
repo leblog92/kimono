@@ -122,6 +122,7 @@
 			a:visited{text-decoration:none;}
 			a:hover{text-decoration:none;}
 			a:active{text-decoration:none;}
+		
 		</style>
 	</head>
 	<body>
@@ -146,6 +147,8 @@
 			<br>
 			Pattern URL <input type="text" id="input2"></input><button id="ok1">OK</button><br>
 			<br>
+			Pattern Hue <input type="range" id="ihue" name="ihue" min="0" max="360" value="0"><br>
+			<br>
 			<table>
 			<tbody>
 			<tr>
@@ -163,11 +166,9 @@
 			<br>
 			Keyboard Shortcuts<br>
 			• <span style="color:#8C5F37">0 > Reset</span><br>
-			• <span style="color:#8C5F37">1 > Pattern 1</span><br>
-			• <span style="color:#8C5F37">2 > Pattern 2</span><br>
-			• <span style="color:#8C5F37">3 > Pattern 3</span><br>
-			• <span style="color:#8C5F37">f > Front view</span><br>
-			• <span style="color:#8C5F37">b > Back view</span><br>
+			• <span style="color:#8C5F37">1,2,3 > Pattern 1,2,3</span><br>
+			• <span style="color:#8C5F37">-/+ > Change pattern size</span><br>
+			• <span style="color:#8C5F37">f/b > Front view/Back view</span><br>
 			• <span style="color:#8C5F37">Mousewheel > Change pattern size</span><br>
 		</div>
 		<script>
@@ -179,6 +180,7 @@
 			const inputDiv=document.querySelector(".input-div");
 			const input=document.querySelector("input");
 			const input2=document.getElementById("input2");
+			const hue=document.getElementById("hue");
 			
 			let front=true;
 			let oldURL=null;
@@ -200,13 +202,13 @@
 				div1.style.backgroundImage=`url("${newURL}")`;
 			});
 
-			smaller.addEventListener("click",function(){size--;if(size<1){size=1};div1.style.backgroundSize=size+"px";});
-			bigger.addEventListener("click",function(){size++;div1.style.backgroundSize=size+"px";});
+			smaller.addEventListener("click",function(){size=size-10;if(size<1){size=1};div1.style.backgroundSize=size+"px";});
+			bigger.addEventListener("click",function(){size=size+10;div1.style.backgroundSize=size+"px";});
 
 			document.addEventListener("keypress",(event)=>{
 				var name=event.key;
 				var code=event.code;
-				if(name=="-"){size--;div1.style.backgroundSize=size+"px";}
+				if(name=="-"){size--;if(size<1){size=1};div1.style.backgroundSize=size+"px";}
 				if(name=="+"){size++;div1.style.backgroundSize=size+"px";}
 				if(event.key=="0"){size=60;chgpat(0);div1.style.backgroundSize=size+"px";}
 				if(name=="1"){chgpat(1);}
@@ -218,7 +220,7 @@
 			
 			froback.addEventListener("click",function(){if(front==true){div2.style.backgroundImage="url('back.png')";froback.innerHTML="Front view";front=false;}else{div2.style.backgroundImage="url('front.png')";froback.innerHTML="Back view";front=true;}});
 			
-			input.onchange=function(e){
+			input.onchange=function(){
 				div1.style.backgroundImage="url('"+URL.createObjectURL(this.files[0])+"')";
 			}
 
@@ -234,6 +236,10 @@
 				size++;
 			}
 				div1.style.backgroundSize=size+"px";
+			}
+
+			ihue.onchange=function(){
+				div1.style.filter="hue-rotate("+ihue.value+"deg)";
 			}
 		</script>
 	</body>
