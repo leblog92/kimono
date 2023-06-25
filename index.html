@@ -8,11 +8,19 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
 		<style>
-			body {
+		html,body{
+			height:100%;
+			margin:0;
+		}
+
+		body {
 				background-color:#DAB983;
 				font-family:'Poppins',sans-serif;
 				font-family:'Roboto',sans-serif;
 				font-family:'Roboto Mono',monospace;
+				background-image:url("texture.png");
+				background-position:left bottom;
+				background-repeat:no-repeat; 
 			}
 			button {
 				background:none;
@@ -28,6 +36,9 @@
 				border-radius:20px;
 				box-shadow:0 0 7px rgba(0, 0, 0, 0.5);
 				transition:0.5s;
+				position:fixed;
+				left:8px;
+				top:8px;
 				
 			}
 
@@ -45,7 +56,8 @@
 			#div3 {
 				position:fixed;
 				top:8px;
-				right:5%;
+				left:850px;
+				border-radius:20px;
 			}
 
 			#div4 {
@@ -56,6 +68,7 @@
 				left:8px;
 				background:none;
 				border-radius:20px;
+				border:1px solid #8C5F37;
 			}
 
 			#input2{
@@ -123,21 +136,45 @@
 			a:hover{text-decoration:none;}
 			a:active{text-decoration:none;}
 		
+		#tit{
+			font-size:24px;
+		}
+
+		#subtit{
+			color:#8C5F37;
+		}
+
+		.black{
+			color:black;
+		}
+		
+		.col1{
+			color:#8C5F37;
+		}
+		
+		@media only screen and (hover: none) and (pointer: coarse){
+
+			#div3{
+				top:850px;
+				left:8px;
+			}
+
+		}
 		</style>
 	</head>
 	<body>
 		<div id="div1"></div>
 		<div id="div2"></div>
-		<div id="div3"><br><span style="font-size:24px;">Barbara's Cloth Pattern Tester</span><br>
-		<div id="div4" onwheel="myWheel(event)"></div>
-		<span style="color:#8C5F37;">バーバラの布パターンテスター</span><br>
-		<br>
+		<div id="div3"><br><span id="tit">Barbara's Cloth Pattern Tester</span><br>
+			<div id="div4" onwheel="myWheel(event)"></div>
+			<span id="subtit">バーバラの布パターンテスター</span><br>
+			<br>
 			<table>
 				<tbody>
 					<tr>
-						<td><button id="but1"><img src="pat1.png" class="samp" /><br><span style="color:black">Pattern 1</span><br>サンプル 1</button></td>
-						<td><button id="but2"><img src="pat2.png" class="samp" /><br><span style="color:black">Pattern 2</span><br>サンプル 2</button></td>
-						<td><button id="but3"><img src="pat3.png" class="samp" /><br><span style="color:black">Pattern 3</span><br>サンプル 3</button></td>
+						<td><button id="but1"><img src="pat1.png" class="samp" /><br><span class="black">Pattern 1</span><br>サンプル 1</button></td>
+						<td><button id="but2"><img src="pat2.png" class="samp" /><br><span class="black">Pattern 2</span><br>サンプル 2</button></td>
+						<td><button id="but3"><img src="pat3.png" class="samp" /><br><span class="black">Pattern 3</span><br>サンプル 3</button></td>
 					</tr>
 				</tbody>
 			</table><br>
@@ -150,11 +187,13 @@
 			Pattern Hue <input type="range" id="ihue" name="ihue" min="0" max="360" value="0"><br>
 			<br>
 			<table>
-			<tbody>
-			<tr>
-			<td style="text-align:left;padding-right:10px;">Change pattern size<br><span style="color:#8C5F37;">パターンサイズの変更</span></td><td style="vertical-align:middle;"><span class="sp1" id="smaller">-</span></td><td style="vertical-align:middle;"><span class="sp1" id="bigger">+</span></td>
-			</tr>
-			</tbody>
+				<tbody>
+				<tr>
+					<td style="text-align:left;padding-right:10px;">Change pattern size<br><span class="col1">パターンサイズの変更</span></td>
+					<td style="vertical-align:middle;"><span class="sp1" id="smaller">-</span></td>
+					<td style="vertical-align:middle;"><span class="sp1" id="bigger">+</span></td>
+				</tr>
+				</tbody>
 			</table><br>
 			<span class="sp1" id="froback" style="font-size:1em;">Back view</span>
 			<br>
@@ -165,11 +204,11 @@
 			• <a href="https://tankenjapan.com/25-common-japanese-patterns-and-their-meaning/" target="_blank">Tanken Japan</a><br>
 			<br>
 			Keyboard Shortcuts<br>
-			• <span style="color:#8C5F37">0 > Reset</span><br>
-			• <span style="color:#8C5F37">1,2,3 > Pattern 1,2,3</span><br>
-			• <span style="color:#8C5F37">-/+ > Change pattern size</span><br>
-			• <span style="color:#8C5F37">f/b > Front view/Back view</span><br>
-			• <span style="color:#8C5F37">Mousewheel > Change pattern size</span><br>
+			• <span class="col1">0 > Reset</span><br>
+			• <span class="col1">1,2,3 > Pattern 1,2,3</span><br>
+			• <span class="col1">-/+ > Change pattern size</span><br>
+			• <span class="col1">f/b > Front view/Back view</span><br>
+			• <span class="col1">Mousewheel > Change pattern size</span><br>
 		</div>
 		<script>
 			const div1=document.getElementById("div1");
